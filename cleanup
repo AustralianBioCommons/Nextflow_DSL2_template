@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# run this script to clean everything up 
+# includes all workdirs, resultsdirs, DAG, reports, logs
+
+rm -rf work results report.html* flowchart.pdf* .nextflow*
