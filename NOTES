@@ -1,0 +1,19 @@
+05/08
+- was making workflow consisting of 2 subworkflows 
+- dsl2
+- process1 working 
+- process2 not yet
+
+WORKDIR=/home/ubuntu/PIPE-2988-ALS_StructuralV/Nextflow_DSL2_template/modules
+
+- after process2 working will need to move outdir to main dir, not in modules 
+- remember to clean up before pushing to git dev 
+
+08/08
+- made script in process2 to split single file into multiple files and emit one line per file
+- running into issues with outputting multiple files 
+- have been looking at flatmap but is unknown operator in dsl2? 
+- https://www.nextflow.io/docs/latest/dsl2.html#dsl2-migration-notes
+
+09/08
+- 
