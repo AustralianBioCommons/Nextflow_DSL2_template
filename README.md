@@ -5,7 +5,7 @@ This is a template for creating Nextflow DSL2 pipelines. **This template is stil
 ## Description  
 [Nextflow](https://www.nextflow.io/) is open source and scalable workflow management software, initially developed for bioinformatics. It enables the development and running of integrated, reproducible workflows consisting of multiple processes, various environment management systems, scripting languages, and software packages. Nextflow developers claim Nextflow is designed to have a minimal learning curve as it doesnt require end users to learn new programming languages. However, its extensive capabilities, use of Groovy syntax, and [comprehensive documentation](https://www.nextflow.io/docs/latest/index.html) can be overwhelming for end users who aren't well versed in programming and software development.  
 
-We developed this template (using DSL2 syntax) to aid beginners in developing their own Nextflow workflows. Depending on your needs you can edit the files here to run 
+We developed this template (using DSL2 syntax) to aid beginners in developing their own Nextflow workflows. Depending on your needs you can edit the files here to develop your own bioinformatics workflows. 
 
 ## Installing Nextflow
 
