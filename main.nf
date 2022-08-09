@@ -1,5 +1,8 @@
 #!/usr/bin/env nextflow
 
+/// To use DSL-2 will need to include this
+nextflow.enable.dsl=2
+
 // =================================================================
 // main.nf is the pipeline script for a nextflow pipeline
 // Should contain the following sections:
@@ -16,11 +19,17 @@
 //
 // ===================================================================
 
-include { workflow_1_1 } from './modules/work1.nf'
-include { workflow_1_2 } from './modules/work1.nf'
+// Import subworkflows to be run in the workflow
+// Each of these is a separate .nf script saved in modules/
+// Add as many of these as you need. The example below will
+// look for the process called process in modules/moduleName.nf
+// Include { process } from './modules/moduleName'
+include { processOne } from './modules/process1'
+include { processTwo } from './modules/process2'
 
-/// To use DSL-2 will need to include this
-nextflow.enable.dsl=2
+// Define channels 
+cohort_ch = Channel.fromPath("${params.cohort}")
+outDir_ch = Channel.fromPath("${params.outDir}")
 
 /// Print a header for your pipeline 
 
@@ -52,62 +61,54 @@ log.info """\
  Log issues @ GITHUB REPO DOT COM
 
  All of the default parameters are set in `nextflow.config`
- 
  """
-
 
 /// Help function 
 // This is an example of how to set out the help function that 
 // will be run if run command is incorrect (if set in workflow) 
-// or missing 
+// or missing/  
 
 def helpMessage() {
     log.info"""
-
-  Usage:  nextflow run <PATH TO REPO>/myPipeline-nf <args>
+  Usage:  nextflow run <PATH TO REPO>/myPipeline-nf <args> --outDir
 
   Required Arguments:
-	--flag		Description of flag function
+	--outDir		Specify path to output directory
 
+	--cohort		Specify full path and name of sample
+				input file (tab separated).
     """.stripIndent()
 }
-
-/// Define workflow 
-// Import subworkflows to be run in the workflow
-// Each of these is a separate .nf script saved in modules/
-// Add as many of these as you need. The example below will
-// look for the process called process in modules/moduleName.nf
-// Include { process } from './modules/moduleName'
-include { workflow_1_1 } from './modules/work1.nf'
-include { workflow_1_2 } from './modules/work1.nf'
 
 /// Main workflow structure. Include some input/runtime tests here.
 // Make sure to comment what each step does for readability. 
 
 workflow {
 
-// Show help message if the user specifies --help or if any required params 
-// are not provided at runtime
+// Show help message if --help is run or if any required params are not 
+// provided at runtime
 
-        if ( params.help || params.outDir == false ){
+        if ( params.help ){
         // Invoke the help function above and exit
               helpMessage()
               exit 1
 
         // consider adding some extra contigencies here.
-        // could validate path of all input files in list
-        // could validate indexes for input files exist
-        // could validate indexes for reference exist
-        // confirm with each tool, any requirements for their run
+        // could validate path of all input files in list?
+        // could validate indexes for input files exist?
+        // could validate indexes for reference exist?
+        // confirm with each tool, any requirements for their run?
 
-// if none of the above are a problem, run the workflow
+// if none of the above are a problem, then run the workflow
 	} else {
 	
-	// run workflow 1.1
-	workflow_1_1()
+	// Run process 1 example
+	processOne(cohort_ch, outDir_ch)
 	
-	// run workflow 1.2
-	workflow_1_2()
-	}
-}
+	// process 2 example 
+	processTwo(processOne.out)
+}}
 
+workflow.onComplete {
+	log.info ( workflow.success ? "\nDone! Open the following report in your browser --> $params.outDir/REPORTNAME" : "Oops .. something went wrong" )
+}

@@ -1,0 +1,6 @@
+# sampleID	labID	group	sex
+sample1	id1	1	F
+sample2	id2	1	F
+sample3	id3	2	M
+sample4	id4	2	M
+sample5	id5	1	M

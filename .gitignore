@@ -1,2 +1,5 @@
-nextflow.log.1.
+.nextflow.log*
 nextflow/
+runInfo/
+all_results/
+work/
