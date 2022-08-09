@@ -92,3 +92,6 @@ Coming soon!
 * [A great self guided DSL2 tutorial](https://antunderwood.gitlab.io/bioinformant-blog/posts/building_a_dsl2_pipeline_in_nextflow/)  
 * [Australian BioCommons workflow documentation guidelines](https://github.com/AustralianBioCommons/doc_guidelines)
 
+## Acknowledgements 
+
+The work presented here was developed by the Sydney Informatics Hub, a Core Research Facility of the University of Sydney and the Australian BioCommons which is enabled by NCRIS via Bioplatforms Australia. 
