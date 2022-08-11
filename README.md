@@ -83,6 +83,8 @@ A great feature of Nextflow is its ability to produce [metric reports](https://w
 Coming soon! 
 
 ## Resources 
+* [Nextflow training workshop materials](https://training.seqera.io/) 
+* [Nextflow YouTube channel](https://www.youtube.com/c/Nextflow)  
 * [Nextflow quick start guide](https://www.nextflow.io/index.html#GetStarted)
 * [Intro to Nextflow workflows](https://carpentries-incubator.github.io/workflows-nextflow/01-getting-started-with-nextflow/index.html)
 * [Nextflow's nf-core pipelines](https://nf-co.re/)
