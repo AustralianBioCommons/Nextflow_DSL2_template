@@ -91,6 +91,7 @@ Coming soon!
 * [DSL2 pipeline structure walkthrough video from nf-core](https://www.youtube.com/watch?v=0xjc7PkF1Bc)
 * [DSL2 modules tutorial video](https://www.youtube.com/watch?v=6k9lWewSBYc)  
 * [Intro to DSL2 video](https://www.youtube.com/watch?v=I-hunuzsh6A&t=658s)  
+* [Nextflow for data intensive pipelines from Pawsey Supercomputing Center](https://www.youtube.com/watch?v=bIRLbYPWHoM)
 * [A great self guided DSL2 tutorial](https://antunderwood.gitlab.io/bioinformant-blog/posts/building_a_dsl2_pipeline_in_nextflow/)  
 * [Australian BioCommons workflow documentation guidelines](https://github.com/AustralianBioCommons/doc_guidelines)
 
