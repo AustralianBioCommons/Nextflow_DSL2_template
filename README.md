@@ -15,7 +15,7 @@ Once you have installed Nextflow, you can configure it to run on your system. Th
 
 ## Using this repository 
 
-This repository contains a workflow with two processes, one that follows on from the other. The example processes contain a small bash command each that play around with the text in `samples.txt` (provided). It is currently only designed for small workflows that are designed to be run locally. 
+This repository contains an example workflow with two processes, one that follows on from the other. The example processes contain a small bash command each that play around with the text in `samples.txt` (provided). It is currently only designed for small workflows that are designed to be run locally. 
 
 As is standard for all nextflow pipelines, when the template is run using `nextflow run main.nf` from within the `Nextflow_DSL2_template` repository, some details will be printed to the screen, and a number of directories will be created in the `Nextflow_DSL2_template` repository. This includes: 
 * A `work/` directory 
@@ -31,6 +31,7 @@ Nextflow_DSL2_template
 ├── README.md
 ├── cleanup
 ├── main.nf
+├── guides 
 ├── modules
 │   ├── process1.nf
 │   └── process2.nf
@@ -47,6 +48,7 @@ Some extra components for running this template are:
 * `cleanup`: removes workdir, results directory, as well as hidden nextflow logs and directories that will be generated when the template example is run. To use: `bash cleanup` 
 * `run_pipeline`: runs the nextflow command for this template. To use: `bash run_pipeline` 
 * `samples.txt`: contains an example file to be processed with the example processes in the template. 
+* `guides`: short explainers of how to construct various features using nextflow. This will be added to progressively.  
 
 ### What's in `main.nf`? 
 
