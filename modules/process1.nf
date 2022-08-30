@@ -6,6 +6,8 @@ nextflow.enable.dsl=2
 // Define the process
 /// This example takes input manifest and capitalises sampleID
 process processOne {
+        cpus "${params.cpus}"
+	debug = true
 
 	// Unhash container command below and edit name of container
 	// if using Docker/Singularity containers
