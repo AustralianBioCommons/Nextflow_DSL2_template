@@ -45,11 +45,6 @@ workflow {
         else { samtoolsStats(cohort, file(params.ref))
         }
 
-        // Run mosdepth
-        mosdepth(cohort)
-
-        // Run qualimapBamQC
-        qualimapBamqc(cohort)
 }}
 
 
