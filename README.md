@@ -92,6 +92,7 @@ Coming soon!
 * [Nextflow quick start guide](https://www.nextflow.io/index.html#GetStarted)
 * [Intro to Nextflow workflows](https://carpentries-incubator.github.io/workflows-nextflow/01-getting-started-with-nextflow/index.html)
 * [Nextflow's nf-core pipelines](https://nf-co.re/)
+* [NF-camp tutorial converting rnaseq-nf pipeline to DSL2](https://github.com/nextflow-io/nfcamp-tutorial)  
 * [DSL2 pipeline structure walkthrough video from nf-core](https://www.youtube.com/watch?v=0xjc7PkF1Bc)
 * [DSL2 modules tutorial video](https://www.youtube.com/watch?v=6k9lWewSBYc)  
 * [Intro to DSL2 video](https://www.youtube.com/watch?v=I-hunuzsh6A&t=658s)  
