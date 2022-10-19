@@ -18,11 +18,12 @@ graph TD;
     Manta_rehead-->SURVIVOR;
 ```
 
+
 ## The fix
 
 You can use the `emit` option to assign names to process output definitions. You can use these outputs as inputs in downstream processes without needing to directly associate them with a sample. In the following example we have taken a vcf file and its index output by Manta and then renamed the sampleID in the vcf's header. 
 
-Given the input to the manta{} process was mapped to each sample using the val path tuple, outputs can specify ${sampleID}. The rehead_manta{} process takes the  output files from the manta{} process and ${sampleID} as a tuple and two outputs of Manta, as defined by `emit:`.
+Given the input to the manta{} process was mapped to each sample using the val path tuple, outputs can specify `${sampleID}`. The rehead_manta{} process takes the  output files from the manta{} process and `${sampleID}` as a tuple and two outputs of Manta, as defined by `emit:`.
 
 In the `manta.nf` file:  
 ```
@@ -98,7 +99,7 @@ process rehead_manta {
 	tuple val(sampleID), path(manta_diploid_convert_tbi)
 		
 	output:
-	path("Manta_*.vcf")	, emit: Manta_convertedVCF	
+	path("Manta_*.vcf")	, emit: FinalVCF	
 		
 	script:
 	"""
