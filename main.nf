@@ -46,7 +46,7 @@ log.info """\
          `-..,..-'       `-..,..-'       `-..,..-'       `       
 
 
-                ~~~~ Version: ${params.version} ~~~~
+             ~~~~ Version: ${params.version} ~~~~
  
 
  Created by the Sydney Informatics Hub, University of Sydney
@@ -81,10 +81,10 @@ def helpMessage() {
   Usage:  nextflow run <PATH TO REPO>/myPipeline-nf <args> --outDir
 
   Required Arguments:
-	--outDir		Specify path to output directory
+	--outDir	Specify path to output directory
 
 	--input		Specify full path and name of sample
-				input file (tab separated).
+			input file (tab separated).
     """.stripIndent()
 }
 
