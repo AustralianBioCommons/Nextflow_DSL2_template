@@ -24,12 +24,9 @@ nextflow.enable.dsl=2
 // Add as many of these as you need. The example below will
 // look for the process called process in modules/moduleName.nf
 // Include { process } from './modules/moduleName'
-include { processOne } from './modules/process1'
-include { processTwo } from './modules/process2'
+  include { processOne } from './modules/process1'
+  include { processTwo } from './modules/process2'
 
-// Define channels 
-cohort_ch = Channel.fromPath("${params.cohort}")
-outDir_ch = Channel.fromPath("${params.outDir}")
 
 /// Print a header for your pipeline 
 
@@ -49,7 +46,7 @@ log.info """\
          `-..,..-'       `-..,..-'       `-..,..-'       `       
 
 
-                ~~~~ Version: 1.0 ~~~~
+                ~~~~ Version: ${params.version} ~~~~
  
 
  Created by the Sydney Informatics Hub, University of Sydney
@@ -61,6 +58,17 @@ log.info """\
  Log issues @ GITHUB REPO DOT COM
 
  All of the default parameters are set in `nextflow.config`
+
+ =======================================================================================
+Workflow run parameters 
+=======================================================================================
+
+input       : ${params.input}
+outDir      : ${params.outDir}
+workDir     : ${workflow.workDir}
+
+=======================================================================================
+
  """
 
 /// Help function 
@@ -75,7 +83,7 @@ def helpMessage() {
   Required Arguments:
 	--outDir		Specify path to output directory
 
-	--cohort		Specify full path and name of sample
+	--input		Specify full path and name of sample
 				input file (tab separated).
     """.stripIndent()
 }
@@ -88,7 +96,7 @@ workflow {
 // Show help message if --help is run or if any required params are not 
 // provided at runtime
 
-        if ( params.help ){
+        if ( params.help || params.input == false ){   
         // Invoke the help function above and exit
               helpMessage()
               exit 1
@@ -102,6 +110,10 @@ workflow {
 // if none of the above are a problem, then run the workflow
 	} else {
 	
+  // Define input channels 
+  cohort_ch = Channel.fromPath("${params.cohort}")
+  outDir_ch = Channel.fromPath("${params.outDir}")
+
 	// Run process 1 example
 	processOne(cohort_ch, outDir_ch)
 	
@@ -110,5 +122,19 @@ workflow {
 }}
 
 workflow.onComplete {
-	log.info ( workflow.success ? "\nDone! Open the following report in your browser --> $params.outDir/REPORTNAME" : "Oops .. something went wrong" )
+  summary = """
+=======================================================================================
+Workflow execution summary
+=======================================================================================
+
+Duration    : ${workflow.duration}
+Success     : ${workflow.success}
+workDir     : ${workflow.workDir}
+Exit status : ${workflow.exitStatus}
+outDir      : ${params.outDir}
+
+=======================================================================================
+  """
+  println summary
+
 }

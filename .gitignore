@@ -1,5 +1,5 @@
 .nextflow.log*
-nextflow/
+.nextflow/
 runInfo/
 all_results/
 work/

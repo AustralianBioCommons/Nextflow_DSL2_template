@@ -19,7 +19,7 @@ process processOne {
 	// See: https://www.nextflow.io/docs/latest/process.html#inputs
 	/// each input needs to be placed on a new line
 	input:
-	path cohort
+	path input
 	path outDir
 
 	// See: https://www.nextflow.io/docs/latest/process.html#outputs
@@ -32,9 +32,7 @@ process processOne {
 	/// and outputs to new file
 	script:
 	"""
-	cohort=$cohort
-
-	cat $cohort | tr '[a-z]' '[A-Z]' \
+	cat ${params.input} | tr '[a-z]' '[A-Z]' \
 	> ./processed_cohort.txt
 	"""
 }
