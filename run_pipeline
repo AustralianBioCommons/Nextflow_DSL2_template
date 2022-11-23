@@ -1,6 +1,5 @@
 #!/bin/bash 
 
-
 nextflow run main.nf \
 	--outDir ./results \
 	-resume -with-report \

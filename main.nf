@@ -32,44 +32,30 @@ nextflow.enable.dsl=2
 
 log.info """\
 
-      ============================================
-      ============================================
-         N A M E  O F  Y O U R  P I P E L I N E 
-      ============================================
-      ============================================
+log.info """\
 
- -._    _.--'"`'--._    _.--'"`'--._    _.--'"`'--._    _  
-    '-:`.'|`|"':-.  '-:`.'|`|"':-.  '-:`.'|`|"':-.  '.` :    
-  '.  '.  | |  | |'.  '.  | |  | |'.  '.  | |  | |'.  '.:    
-  : '.  '.| |  | |  '.  '.| |  | |  '.  '.| |  | |  '.  '.  
-  '   '.  `.:_ | :_.' '.  `.:_ | :_.' '.  `.:_ | :_.' '.  `.  
-         `-..,..-'       `-..,..-'       `-..,..-'       `       
-
-
-             ~~~~ Version: ${params.version} ~~~~
- 
-
- Created by the Sydney Informatics Hub, University of Sydney
-
- Find documentation and more info @ GITHUB REPO DOT COM
-
- Cite this pipeline @ INSERT DOI
-
- Log issues @ GITHUB REPO DOT COM
-
- All of the default parameters are set in `nextflow.config`
-
- =======================================================================================
-Workflow run parameters 
+=======================================================================================
+Name of the pipeline - nf 
 =======================================================================================
 
+Created by the Sydney Informatics Hub, University of Sydney
+
+Find documentation and more info @ GITHUB REPO DOT COM
+
+Cite this pipeline @ INSERT DOI
+
+Log issues @ GITHUB REPO DOT COM
+
+
+=======================================================================================
+Workflow run parameters 
+=======================================================================================
 input       : ${params.input}
 outDir      : ${params.outDir}
 workDir     : ${workflow.workDir}
-
 =======================================================================================
 
- """
+"""
 
 /// Help function 
 // This is an example of how to set out the help function that 
@@ -78,21 +64,24 @@ workDir     : ${workflow.workDir}
 
 def helpMessage() {
     log.info"""
-  Usage:  nextflow run <PATH TO REPO>/myPipeline-nf <args> --outDir
+  Usage:  nextflow run <PATH TO REPO>/myPipeline-nf <args> --input <samples.tsv>
 
   Required Arguments:
-	--outDir	Specify path to output directory
 
-	--input		Specify full path and name of sample
-			input file (tab separated).
-    """.stripIndent()
+  --input		Specify full path and name of sample
+			      input file (tab separated).
+
+  Optional Arguments:
+
+  --outDir	Specify path to output directory. 
+	
+""".stripIndent()
 }
 
 /// Main workflow structure. Include some input/runtime tests here.
 // Make sure to comment what each step does for readability. 
 
 workflow {
-
 // Show help message if --help is run or if any required params are not 
 // provided at runtime
 
@@ -112,7 +101,6 @@ workflow {
 	
   // Define input channels 
   cohort_ch = Channel.fromPath("${params.cohort}")
-  outDir_ch = Channel.fromPath("${params.outDir}")
 
 	// Run process 1 example
 	processOne(cohort_ch, outDir_ch)
@@ -122,7 +110,7 @@ workflow {
 }}
 
 workflow.onComplete {
-  summary = """
+summary = """
 =======================================================================================
 Workflow execution summary
 =======================================================================================
@@ -135,6 +123,6 @@ outDir      : ${params.outDir}
 
 =======================================================================================
   """
-  println summary
+println summary
 
 }
