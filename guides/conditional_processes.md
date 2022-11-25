@@ -10,7 +10,7 @@ Give users the options of which processes to execute by specifying a flag in the
 
 ## The fix
 
-Processes that can be run optionally need to be wrapped in an if/else loop within the `workflow{}` section of the `main.nf` script. In the example below users can specify whether they run samtools flagstat or samtools stat commands for less or more verbose summary metrics output, respectively. All processed outside of the 
+Processes that can be run optionally need to be wrapped in an if/else loop within the `workflow{}` section of the `main.nf` script. In the example below users can specify whether they run samtools flagstat or samtools stat commands for less or more verbose summary metrics output, respectively. 
  
 ```
 workflow {
