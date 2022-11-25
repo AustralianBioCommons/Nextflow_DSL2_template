@@ -8,3 +8,5 @@ Guide .md template is [here](https://github.com/Sydney-Informatics-Hub/Nextflow_
 |[Multiple samples with input file](https://github.com/Sydney-Informatics-Hub/Nextflow_DSL2_template/blob/main/guides/process_inputcsv.md)|process multiple samples in parallel|:heavy_check_mark: |
 |[Pass output as input](https://github.com/Sydney-Informatics-Hub/Nextflow_DSL2_template/blob/main/guides/passProcesses.md)|use output from one process as input for the next|:heavy_check_mark: |
 |[Emit optional output](https://github.com/Sydney-Informatics-Hub/Nextflow_DSL2_template/blob/main/guides/emit_optional.md)|optionally generate a process output |:heavy_check_mark: |
+|[Print stdout](https://github.com/Sydney-Informatics-Hub/Nextflow_DSL2_template/blob/main/guides/turnOffstdout.md)|optionally print stdout to screen |:heavy_check_mark: |
+
