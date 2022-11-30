@@ -32,6 +32,10 @@ Nextflow_DSL2_template
 ├── LICENSE
 ├── README.md
 ├── cleanup
+├── config
+│   ├── nimbus.config
+│   ├── setonix.config
+│   └── standard.config
 ├── main.nf
 ├── guides 
 ├── modules
@@ -45,6 +49,7 @@ The main components for using this template are:
 * `main.nf` 
 * `nextflow.config` 
 * `modules/` 
+* `config/`
 
 Some extra components for running this template are: 
 * `cleanup`: removes workdir, results directory, as well as hidden nextflow logs and directories that will be generated when the template example is run. To use: `bash cleanup` 
@@ -72,6 +77,14 @@ This is the main configuration script that Nextflow looks for when you run `next
 * Default parameters for running the pipeline. These include default file names, containers, paths, etc. These can be overwritten when launching the pipeline. 
 * Customisable workflow run info reports with `dag{}`, `report{}`, `timeline{}`, and `trace{}`. You can specify where to output these run summary files. 
 
+### What's in `config/`? 
+
+This directory contains various profile modules for configuring the pipeline run. Some care should be taken when using these config profiles. See the [Nextflow documentation](https://nextflow.io/docs/latest/config.html#config-profiles) for more details. This directory contains the following profiles:
+* `nimbus`: this profile is specific to Pawsey Supercomputing Centre's Nimbus cloud. It enables the use of Docker. 
+* `standard`: this is the default profile which runs Singularity.
+* `setonix`: this profile is specific to Pawsey Supercomputing Centre's Setonix HPC. It enables the use of the SLURM job scheduler and Singularity.  
+* `gadi`: coming soon! 
+
 ### What's in `modules/`?
 
 This directory contains all sub-workflows to be run with `nextflow run main.nf`. It is considered good practice to split out processes into separate `.nf` files and store them here, rather than including them all in the `main.nf` file. This directory is referenced in `main.nf` by using [`include {x} from ./modules/process`](https://www.nextflow.io/docs/latest/dsl2.html#modules). These process scripts currently contain all code to be run in the `script:` block. 
@@ -82,7 +95,7 @@ Each `.nf` script contains the process to be run, in addition to details of whic
 
 A great feature of Nextflow is its ability to produce [metric reports](https://www.nextflow.io/docs/latest/metrics.html#) on run execution including walltime, I/O, and resource usage for each report. These are currently enabled in the `nextflow.config` template.  
 
-## Some recommendations  
+## Recommended coding conventions 
 
 Coming soon! 
 
