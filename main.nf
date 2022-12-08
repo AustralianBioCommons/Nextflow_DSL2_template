@@ -32,8 +32,6 @@ nextflow.enable.dsl=2
 
 log.info """\
 
-log.info """\
-
 =======================================================================================
 Name of the pipeline - nf 
 =======================================================================================
@@ -68,8 +66,8 @@ def helpMessage() {
 
   Required Arguments:
 
-  --input		Specify full path and name of sample
-			      input file (tab separated).
+  --input	Specify full path and name of sample
+		input file (tab separated).
 
   Optional Arguments:
 
