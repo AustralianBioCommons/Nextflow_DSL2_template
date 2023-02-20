@@ -17,13 +17,29 @@ Once you have installed Nextflow, you can configure it to run on your system. Th
 
 ## Using this repository 
 
-This repository contains an example workflow with two processes, one that follows on from the other. The example processes contain a small bash command each that play around with the text in `samples.txt` (provided). It is currently only designed for small workflows that are designed to be run locally. 
+This repository contains an example workflow with two processes, one that follows on from the other. The example processes contain a small bash command each that play around with the text in `samples.txt` (provided). It is currently only designed for small workflows that can be run with any of the provided config files. 
 
-As is standard for all nextflow pipelines, when the template is run using `nextflow run main.nf` from within the `Nextflow_DSL2_template` repository, some details will be printed to the screen, and a number of directories will be created in the `Nextflow_DSL2_template` repository. This includes: 
+As is standard for all nextflow pipelines, when the template is run from within the `Nextflow_DSL2_template` repository, some details will be printed to the screen, and a number of directories will be created in the `Nextflow_DSL2_template` repository. This includes: 
 * A `work/` directory 
 * A `.nextflow.log` file
 * A `.nextflow/` directory 
-* Outputs specified by the example code: `all_results/` which contains results and `runInfo` which contains runtime reports.
+* Outputs specified by the example code: `results/` which contains results and `runInfo` which contains runtime reports.
+
+Run the workflow with the standard profile (requires Singularity), with:
+
+```
+nextflow run main.nf \
+	--input samples.txt \
+	-c config/standard.config
+```
+
+If you are working on either Setonix or Gadi HPCs, you will need to specify absolute paths to your input file and edit the provided infrastructure-specific config file according to your project space and user ID. For example, to run on NCI's Gadi HPC:
+
+```
+nextflow run main.nf \
+	--input /scratch/ab11/gs5555/Nextflow_DSL2_template/samples.txt \
+	-c /scratch/ab11/gs5555/Nextflow_DSL2_template/config/gadi.config
+```
 
 This repository is structured as follows: 
 
@@ -99,7 +115,7 @@ A great feature of Nextflow is its ability to produce [metric reports](https://w
 
 ## Recommended coding conventions 
 
-We're currently working on this. Some recommendations regarding code structure and syntax for Nextflow workflows will be coming soon! 
+We're currently working on this. Some recommendations regarding code structure and syntax for Nextflow workflows coming soon! 
 
 ## Resources 
 * [Nextflow training workshop materials](https://training.seqera.io/) 
