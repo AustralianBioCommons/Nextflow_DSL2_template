@@ -17,13 +17,29 @@ Once you have installed Nextflow, you can configure it to run on your system. Th
 
 ## Using this repository 
 
-This repository contains an example workflow with two processes, one that follows on from the other. The example processes contain a small bash command each that play around with the text in `samples.txt` (provided). It is currently only designed for small workflows that are designed to be run locally. 
+This repository contains an example workflow with two processes, one that follows on from the other. The example processes contain a small bash command each that play around with the text in `samples.txt` (provided). It is currently only designed for small workflows that can be run with any of the provided config files. 
 
-As is standard for all nextflow pipelines, when the template is run using `nextflow run main.nf` from within the `Nextflow_DSL2_template` repository, some details will be printed to the screen, and a number of directories will be created in the `Nextflow_DSL2_template` repository. This includes: 
+As is standard for all nextflow pipelines, when the template is run from within the `Nextflow_DSL2_template` repository, some details will be printed to the screen, and a number of directories will be created in the `Nextflow_DSL2_template` repository. This includes: 
 * A `work/` directory 
 * A `.nextflow.log` file
 * A `.nextflow/` directory 
-* Outputs specified by the example code: `all_results/` which contains results and `runInfo` which contains runtime reports.
+* Outputs specified by the example code: `results/` which contains results and `runInfo` which contains runtime reports.
+
+Run the workflow with the standard profile (requires Singularity), with:
+
+```
+nextflow run main.nf \
+	--input samples.txt \
+	-c config/standard.config
+```
+
+If you are working on either Setonix or Gadi HPCs, you will need to specify absolute paths to your input file and edit the provided infrastructure-specific config file according to your project space and user ID. For example, to run on NCI's Gadi HPC:
+
+```
+nextflow run main.nf \
+	--input /scratch/ab11/gs5555/Nextflow_DSL2_template/samples.txt \
+	-c /scratch/ab11/gs5555/Nextflow_DSL2_template/config/gadi.config
+```
 
 This repository is structured as follows: 
 
@@ -70,7 +86,7 @@ This is the primary pipeline script which pulls additional code for subprocesses
 ### What's in `nextflow.config`? 
 
 This is the main configuration script that Nextflow looks for when you run `nextflow run main.nf`. It contains a number of property definitions that are used by the pipeline. A key feature of Nextflow is the ability to separate workflow implementation from the underlying execution platformm using this configuration file. Since we can add additional configuration files for different run environments (i.e. job schedulers, use of singularity vs bioconda) each configuration file can contain conflicting settings and parameters listed in this file can be overwritten in the run command by specifiying relevant commands. See [here](https://www.nextflow.io/docs/latest/config.html#configuration-file) for details on the heirarchy of confuration files. This file contains: 
-* Mainfest for defining some metadata including authorship, link to the repo, version etc 
+* Mainfest for defining some metadata including authorship, link to the repo, workflow version, etc 
 * Mandated minimal version of Nextflow that can be used to run this pipeline 
 * Resume function that allows the pipeline to start up at the last successful process if the run fails part way through (currently enabled) 
 * Various profile definitions that can be activated when launching a pipeline. These can be used together, depending on their requirements. We can define various profiles depending on the system you're using. See [here](https://www.nextflow.io/docs/latest/config.html?highlight=profiles#config-profiles) for more details on what sorts of things can be included here. 
@@ -79,11 +95,13 @@ This is the main configuration script that Nextflow looks for when you run `next
 
 ### What's in `config/`? 
 
-This directory contains various profile modules for configuring the pipeline run. Some care should be taken when using these config profiles. See the [Nextflow documentation](https://nextflow.io/docs/latest/config.html#config-profiles) for more details. This directory contains the following profiles:
+This directory contains various profile modules for configuring the pipeline run. Some care should be taken when using these config profiles. See the [Nextflow documentation](https://nextflow.io/docs/latest/config.html#config-profiles) for more details.
+
+This directory contains the following profiles:
 * `nimbus`: this profile is specific to Pawsey Supercomputing Centre's Nimbus cloud. It enables the use of Docker. 
 * `standard`: this is the default profile which runs Singularity.
 * `setonix`: this profile is specific to Pawsey Supercomputing Centre's Setonix HPC. It enables the use of the SLURM job scheduler and Singularity.  
-* `gadi`: coming soon! 
+* `gadi`: this profile is specific to the National Computational Infrastructure's Gadi HPC. It enables the use of the PBS Pro job scheduler and Singularity 
 
 ### What's in `modules/`?
 
@@ -97,7 +115,7 @@ A great feature of Nextflow is its ability to produce [metric reports](https://w
 
 ## Recommended coding conventions 
 
-Coming soon! 
+We're currently working on this. Some recommendations regarding code structure and syntax for Nextflow workflows coming soon! 
 
 ## Resources 
 * [Nextflow training workshop materials](https://training.seqera.io/) 
