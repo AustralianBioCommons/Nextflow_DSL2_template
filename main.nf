@@ -24,12 +24,10 @@ nextflow.enable.dsl=2
 // Add as many of these as you need. The example below will
 // look for the process called process in modules/moduleName.nf
 // Include { process } from './modules/moduleName'
-  include { processOne } from './modules/process1'
-  include { processTwo } from './modules/process2'
-
+include { processOne } from './modules/process1'
+include { processTwo } from './modules/process2'
 
 /// Print a header for your pipeline 
-
 log.info """\
 
 =======================================================================================
@@ -43,7 +41,6 @@ Find documentation and more info @ GITHUB REPO DOT COM
 Cite this pipeline @ INSERT DOI
 
 Log issues @ GITHUB REPO DOT COM
-
 
 =======================================================================================
 Workflow run parameters 
@@ -62,7 +59,7 @@ workDir     : ${workflow.workDir}
 
 def helpMessage() {
     log.info"""
-  Usage:  nextflow run <PATH TO REPO>/myPipeline-nf <args> --input <samples.tsv>
+  Usage:  nextflow run main.nf --input <samples.tsv> 
 
   Required Arguments:
 
@@ -83,28 +80,26 @@ workflow {
 // Show help message if --help is run or if any required params are not 
 // provided at runtime
 
-        if ( params.help || params.input == false ){   
-        // Invoke the help function above and exit
-              helpMessage()
-              exit 1
-
-        // consider adding some extra contigencies here.
-        // could validate path of all input files in list?
-        // could validate indexes for input files exist?
-        // could validate indexes for reference exist?
-        // confirm with each tool, any requirements for their run?
+if ( params.help || params.input == false ){   
+// Invoke the help function above and exit
+	helpMessage()
+	exit 1
+	// consider adding some extra contigencies here.
+	// could validate path of all input files in list?
+	// could validate indexes for input files exist?
+	// could validate indexes for reference exist?
 
 // if none of the above are a problem, then run the workflow
-	} else {
+} else {
 	
-  // Define input channels 
-  cohort_ch = Channel.fromPath("${params.cohort}")
+	// Define input channels 
+	input = Channel.fromPath("${params.input}")
 
 	// Run process 1 example
-	processOne(cohort_ch, outDir_ch)
+	processOne(params.input)
 	
 	// process 2 example 
-	processTwo(processOne.out)
+	processTwo(processOne.out.File)
 }}
 
 workflow.onComplete {
