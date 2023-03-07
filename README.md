@@ -49,6 +49,7 @@ Nextflow_DSL2_template
 ├── README.md
 ├── cleanup
 ├── config
+    ├── gadi.config
 │   ├── nimbus.config
 │   ├── setonix.config
 │   └── standard.config
