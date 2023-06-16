@@ -17,7 +17,7 @@ nextflow.enable.dsl=2
 //
 // ===================================================================
 
-// Import subworkflows to be run in the workflow
+// Import processes or subworkflows to be run in the workflow
 // Each of these is a separate .nf script saved in modules/ directory
 // See https://training.nextflow.io/basic_training/modules/#importing-modules 
 include { processName } from './modules/moduleName'
