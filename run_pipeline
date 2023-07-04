@@ -1,7 +1,0 @@
-#!/bin/bash 
-
-config=/data/Nextflow_DSL2_template/standard.config
-
-nextflow run main.nf \
-	-resume \
-	-c ${config}
