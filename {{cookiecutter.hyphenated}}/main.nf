@@ -6,10 +6,10 @@ nextflow.enable.dsl=2
 // =================================================================
 // main.nf is the pipeline script for a nextflow pipeline
 // Should contain the following sections:
-	// Import subworkflows and modules
-	// Log info function
-	// Help function 
-	// Main workflow structure
+	// Process definitions
+    // Channel definitions
+    // Workflow structure
+	// Workflow summary logs 
 
 // Examples are included for each section. Remove them and replace
 // with project-specific code. For more information see:
@@ -20,7 +20,8 @@ nextflow.enable.dsl=2
 // Import processes or subworkflows to be run in the workflow
 // Each of these is a separate .nf script saved in modules/ directory
 // See https://training.nextflow.io/basic_training/modules/#importing-modules 
-include { processName } from './modules/moduleName'
+include { processOne } from './modules/process1'
+include { processTwo } from './modules/process2' 
 
 // Print a header for your pipeline 
 log.info """\
@@ -30,7 +31,7 @@ Name of the pipeline - nf
 =======================================================================================
 
 Created by <YOUR NAME> 
-Find documentation @ GITHUB REPO DOT COM
+Find documentation @ https://sydney-informatics-hub.github.io/Nextflow_DSL2_template_guide/
 Cite this pipeline @ INSERT DOI
 
 =======================================================================================
@@ -83,14 +84,14 @@ if ( params.help || params.input == false ){
 // Define channels 
 // See https://www.nextflow.io/docs/latest/channel.html#channels
 // See https://training.nextflow.io/basic_training/channels/ 
-	input = Channel.fromPath("${params.input}")
+	input = Channel.value("${params.input}")
 
 // Run process 1 
 // See https://training.nextflow.io/basic_training/processes/#inputs 
-	processName1(input)
+	processOne(input)
 	
 // Run process 2 which takes output of process 1 
-	processName2(processOne.out.File)
+	processTwo(processOne.out.File)
 }}
 
 // Print workflow execution summary 
