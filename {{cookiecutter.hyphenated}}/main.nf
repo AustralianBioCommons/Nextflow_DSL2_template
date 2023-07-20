@@ -6,41 +6,33 @@ nextflow.enable.dsl=2
 // =================================================================
 // main.nf is the pipeline script for a nextflow pipeline
 // Should contain the following sections:
-	// Import subworkflows
-	// Log info function
-	// Help function 
-	// Main workflow structure
-	// Some tests to check input data, essential arguments
+	// Process definitions
+    // Channel definitions
+    // Workflow structure
+	// Workflow summary logs 
 
 // Examples are included for each section. Remove them and replace
-// with project-specific code. For more information on nextflow see:
-// https://www.nextflow.io/docs/latest/index.html and the SIH Nextflow
-// upskilling repo @ INSERT REPO PATH 
+// with project-specific code. For more information see:
+// https://www.nextflow.io/docs/latest/index.html.
 //
 // ===================================================================
 
-// Import subworkflows to be run in the workflow
-// Each of these is a separate .nf script saved in modules/
-// Add as many of these as you need. The example below will
-// look for the process called process in modules/moduleName.nf
-// Include { process } from './modules/moduleName'
+// Import processes or subworkflows to be run in the workflow
+// Each of these is a separate .nf script saved in modules/ directory
+// See https://training.nextflow.io/basic_training/modules/#importing-modules 
 include { processOne } from './modules/process1'
-include { processTwo } from './modules/process2'
+include { processTwo } from './modules/process2' 
 
-/// Print a header for your pipeline 
+// Print a header for your pipeline 
 log.info """\
 
 =======================================================================================
 Name of the pipeline - nf 
 =======================================================================================
 
-Created by the Sydney Informatics Hub, University of Sydney
-
-Find documentation and more info @ GITHUB REPO DOT COM
-
+Created by <YOUR NAME> 
+Find documentation @ https://sydney-informatics-hub.github.io/Nextflow_DSL2_template_guide/
 Cite this pipeline @ INSERT DOI
-
-Log issues @ GITHUB REPO DOT COM
 
 =======================================================================================
 Workflow run parameters 
@@ -54,8 +46,7 @@ workDir     : ${workflow.workDir}
 
 /// Help function 
 // This is an example of how to set out the help function that 
-// will be run if run command is incorrect (if set in workflow) 
-// or missing/  
+// will be run if run command is incorrect or missing. 
 
 def helpMessage() {
     log.info"""
@@ -73,12 +64,11 @@ def helpMessage() {
 """.stripIndent()
 }
 
-/// Main workflow structure. Include some input/runtime tests here.
-// Make sure to comment what each step does for readability. 
-
+// Define workflow structure. Include some input/runtime tests here.
+// See https://www.nextflow.io/docs/latest/dsl2.html?highlight=workflow#workflow
 workflow {
-// Show help message if --help is run or if any required params are not 
-// provided at runtime
+
+// Show help message if --help is run or (||) a required parameter (input) is not provided
 
 if ( params.help || params.input == false ){   
 // Invoke the help function above and exit
@@ -86,22 +76,25 @@ if ( params.help || params.input == false ){
 	exit 1
 	// consider adding some extra contigencies here.
 	// could validate path of all input files in list?
-	// could validate indexes for input files exist?
 	// could validate indexes for reference exist?
 
-// if none of the above are a problem, then run the workflow
+// If none of the above are a problem, then run the workflow
 } else {
 	
-	// Define input channels 
-	input = Channel.fromPath("${params.input}")
+// Define channels 
+// See https://www.nextflow.io/docs/latest/channel.html#channels
+// See https://training.nextflow.io/basic_training/channels/ 
+	input = Channel.value("${params.input}")
 
-	// Run process 1 example
-	processOne(params.input)
+// Run process 1 
+// See https://training.nextflow.io/basic_training/processes/#inputs 
+	processOne(input)
 	
-	// process 2 example 
+// Run process 2 which takes output of process 1 
 	processTwo(processOne.out.File)
 }}
 
+// Print workflow execution summary 
 workflow.onComplete {
 summary = """
 =======================================================================================
