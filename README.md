@@ -1,15 +1,3 @@
-# Pipeline name
+# Nextflow DSL2 template 
 
-## Workflow description 
-
-## User guide 
-
-## Component tools 
-
-## Additional notes
-
-## Help / FAQ / Troubleshooting
-
-## License(s)
-
-## Acknowledgements/citations/credits
+Clone this template using https://github.com/Sydney-Informatics-Hub/template-nf 
